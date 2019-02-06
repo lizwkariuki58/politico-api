@@ -17,7 +17,7 @@ parties =[
     'logo_url': 'slytherin.com/logo'},
 
 ]
-@app.route('/', methods = ['GET'])
+@app.route('/app/version1/parties', methods = ['GET'])
 def get_parties():
     return jsonify({'parties': parties})
 
