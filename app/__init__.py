@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask,jsonify
 from instance.config import app_config
 
 def create_app(config_name):
