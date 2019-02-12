@@ -1,6 +1,5 @@
 import os
 
-<<<<<<< HEAD
 from flask import jsonify,abort, make_response
 
 from app import create_app
