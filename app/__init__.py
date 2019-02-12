@@ -11,3 +11,4 @@ def create_app(config_name):
     app.register_blueprint(parties_bp)
 
     return app
+    
