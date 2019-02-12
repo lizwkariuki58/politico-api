@@ -1,28 +1,23 @@
-class User:
-    pass
-class Party:
-    parties = []
-    id = 0
-    name = ''
-    hqAddress = ''
-    slogan= ''
+class PoliticalParty():
+    """ This class creates the blueprint for creating political parties. """
+    parties=[]
+   
+    def __init__(self, name=None, hqAddress=None, slogan=None):
+        self.id=len(self.parties)+1
+        self.name= name
+        self.hqAddress = hqAddress
+        self.slogan= slogan
+        
+    def create_party(self):
+       party = {
+           'id': len(self.parties)+1,
+           'name': self.name,
+           'hqAddress': self.hqAddress,
+           'slogan':self.slogan
+       }
 
-    def __init__(self):
-        self.parties =[
-            {
-                'id': 1,
-                'name': 'Gryffindor',
-                'hqAddress': '4 Privet Drive',
-                'slogan':'Where dwell the brave at heart!'
-            },
-            {
-                'id': 2,
-                'name': 'Slytherin',
-                'hqAddress': '13 Spinners End'
-                'slogan':'Without cunning, there can be no innovation'
-            },
-
-        ]
-
-class GovernmentOffice:
-    pass
+       self.parties.append(party)
+       return self.parties
+       
+    def get_parties(self):
+        return self.parties
