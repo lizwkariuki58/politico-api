@@ -5,8 +5,8 @@ class PoliticalParty():
     def __init__(self, name=None, hqAddress=None, slogan=None):
         self.id=len(self.parties)+1
         self.name= name
-        self.hqAddress = hqAddress
-        self.slogan= slogan
+        self.hqAddress = name
+        self.slogan= name
         
     def create_party(self):
        party = {
@@ -20,4 +20,7 @@ class PoliticalParty():
        return self.parties
        
     def get_parties(self):
-        return self.parties
+        return make_response(jsonify({
+            'Message': 'OK',
+            'Parties': self.parties
+        }),200)
