@@ -20,7 +20,4 @@ class PoliticalParty():
        return self.parties
        
     def get_parties(self):
-        return make_response(jsonify({
-            'Message': 'OK',
-            'Parties': self.parties
-        }),200)
+        return self.parties
