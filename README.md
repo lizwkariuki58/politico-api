@@ -4,11 +4,12 @@ API for the Politico application
 Hosted on [Heroku](https://git.heroku.com/my-politico-api.git).
 
 **API ENDPOINTS**
+
 | Method   | Endpoint                       | Description                           |
-| -------- | ---------------------------    | ------------------------------------- |
+| -------- | -------------------------------| ------------------------------------- |
 | `POST`   | `/parties/`                    | Create a new party                    |
-| `GET`    | `/parties/`              | View all parties                      |
-| `GET`    | `/parties/<int:party_id>`       | Get a specific party            |
+| `GET`    | `/parties/`                    | View all parties                      |
+| `GET`    | `/parties/<int:party_id>`      | Get a specific party                  |
 
 
 **Payloads**
