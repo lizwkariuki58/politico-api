@@ -21,3 +21,5 @@ class PoliticalParty():
     
     def get_parties(self):
         return self.parties
+
+    

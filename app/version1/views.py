@@ -34,3 +34,19 @@ def get_all_parties():
         'parties': new.parties,
         'status': '200 OK'
     }),200)
+
+@parties_bp.route('/parties/<int:party_id>', methods = ['GET'])
+def get_specific_party(party_id):
+    new = PoliticalParty()
+    for party in new.parties:
+        if new.id==party_id:
+            new_dict=new.__dict__
+            return make_response(jsonify({
+                    'Party':new_dict,
+                    'Status':'200 OK'
+            }))
+    return make_response(jsonify({
+        'Message':'Party Not Found',
+        'Status': '404 Not Found'
+        }))    
+
