@@ -73,3 +73,19 @@ def update_party(party_id):
         'Message':'Party Not Found',
         'Status':'404 Party Not Found'
         }))
+
+@parties_bp.route('/parties/<int:party_id>',methods=['DELETE'])
+def delete_party(party_id):
+    new = PoliticalParty()
+    for party in new.parties:
+        if new.id==party_id:
+            new.parties.remove(new)
+            new_dict=new.__dict__
+            return make_response(jsonify({
+                    'Party':'Party Deleted',
+                    'Status':'200 OK'
+            }))
+    return make_response(jsonify({
+        'Message':'Party Not Found',
+        'Status': '404 Not Found'
+        }))    
