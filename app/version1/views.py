@@ -19,10 +19,10 @@ def create_party():
 
     #The new party is added to the parties list. It is then made json serializable
     new.parties.append(new)
-    new_dict = json.dumps(new.__dict__)
+    new_dict = new.__dict__
     return make_response(jsonify({
             'Party': new_dict,
-            'status':'OK'
+            'status':'200 OK'
 
     }))
 
@@ -32,5 +32,5 @@ def get_all_parties():
     new= PoliticalParty()
     return make_response(jsonify({
         'parties': new.parties,
-        'status': 'OK'
+        'status': '200 OK'
     }),200)
