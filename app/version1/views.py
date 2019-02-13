@@ -50,3 +50,26 @@ def get_specific_party(party_id):
         'Status': '404 Not Found'
         }))    
 
+@parties_bp.route('/parties/<int:party_id>', methods =['PUT'])
+def update_party(party_id):
+    new= PoliticalParty()
+    data= request.json
+    for party in new.parties:
+        if new.id==party_id:
+            if request.json:
+                new.name=data.get('name', new.name)
+                new.hqAddress=data['hqAddress']
+                new.slogan=data['slogan']
+            return make_response(jsonify({
+                    'Message':'Party not Updated',
+                    'Status':'400 Bad Request'
+                    }))
+    new_dict=new.__dict__
+    return make_response(jsonify({
+        'Message':new_dict,
+        'status':'200 OK'
+    }))
+    return make_response(jsonify({
+        'Message':'Party Not Found',
+        'Status':'404 Party Not Found'
+        }))
