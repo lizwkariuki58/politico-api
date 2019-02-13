@@ -6,6 +6,7 @@ parties_bp= Blueprint('parties',__name__)
 
 @parties_bp.route('/parties', methods = ['POST'])
 def create_party():
+    #This method should only be available to an admin user. 
     #Responses from the request.get_json request saved in a Python dictionary called data.
     data = request.get_json()
 
@@ -27,6 +28,7 @@ def create_party():
 
 @parties_bp.route('/parties', methods = ['GET'])
 def get_all_parties():
+    #This method should be available to all users
     new= PoliticalParty()
     return make_response(jsonify({
         'parties': new.parties,
