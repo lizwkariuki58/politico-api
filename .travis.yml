@@ -1,12 +1,14 @@
-sudo: false
 language: python
-python:
-  -2.7
-  -3.5
-  -3.6
-install: pip3 install -r requirement.txt
-before script:
-  - export FLASK_APP =  "$TRAVIS_BUILD_DIR/app.py"
-  - export FLASK_DEBUG=1
 
-script: flask test
+python:
+  - "3.6"
+  
+install: 
+  - pip install -r requirements.txt
+
+env:
+  - export FLASK_APP= 'run.py'
+  - export FLASK_DEBUG=1
+  - export FLASK_ENV= development
+
+script: 'true'
