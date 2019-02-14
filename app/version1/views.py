@@ -119,13 +119,14 @@ def get_all_offices():
 
 @offices_bp.route('/offices/<int:office_id>', methods = ['GET'])
 def get_specific_office(office_id):
+    #This object is created to access the office[] list in the Government Offices class
     new = GovernmentOffice()
-    for office in new.offices:
-        if new.id==office_id:
-            new_dict=new.__dict__
+    for govt_office in new.offices:
+        if govt_office.id==office_id:
+            govt_office_dict=govt_office.__dict__
             return make_response(jsonify({
                     'Status': 200,
-                    'Office': new_dict
+                    'Office': govt_office_dict
             }))
     return make_response(jsonify({
         'Status': '404',
