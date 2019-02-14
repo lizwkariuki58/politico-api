@@ -1,12 +1,8 @@
 language: python
 python:
-  -2.7
-  -3.5
-  -3.6
+  -"3.5"
+  -"3.6"
   
 install: pip install -r requirement.txt
-before script:
-  - export FLASK_APP =  "$TRAVIS_BUILD_DIR/app.py"
-  - export FLASK_DEBUG=1
 
 script: true
