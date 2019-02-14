@@ -116,3 +116,18 @@ def get_all_offices():
         'Offices': new.offices,
         'Status': '200 OK'
     }))
+
+@offices_bp.route('/offices/<int:office_id>', methods = ['GET'])
+def get_specific_office(office_id):
+    new = GovernmentOffice()
+    for office in new.offices:
+        if new.id==office_id:
+            new_dict=new.__dict__
+            return make_response(jsonify({
+                    'Status': 200,
+                    'Office': new_dict
+            }))
+    return make_response(jsonify({
+        'Status': '404',
+        'Error': 'Office Not Found'
+        }))    
