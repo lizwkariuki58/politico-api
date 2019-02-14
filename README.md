@@ -38,6 +38,6 @@ Payload
 
 This response shall be returned
 ```
-'message': 'Party Created'
-'party_id': 1
+'Party': Party
+'status': '200 OK'
 ```
