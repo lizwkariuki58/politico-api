@@ -1,8 +1,9 @@
 from flask import Blueprint,jsonify,request,make_response, abort
 import json
-from app.version1.models import PoliticalParty
+from app.version1.models import PoliticalParty, GovernmentOffice
 
 parties_bp= Blueprint('parties',__name__)
+offices_bp= Blueprint('offices',__name__)
 
 @parties_bp.route('/parties', methods = ['POST'])
 def create_party():
@@ -89,3 +90,22 @@ def delete_party(party_id):
         'Message':'Party Not Found',
         'Status': '404 Not Found'
         }))    
+
+@offices_bp.route('/offices',methods=['POST'])
+def create_office():
+    data = request.get_json()
+
+    office_type = data['office_type']
+    name= data['name']
+
+     # Instance of PoliticalParty is created and the data above is unpacked as an argument
+    new=GovernmentOffice(**data)
+
+    #The new party is added to the parties list. It is then made json serializable
+    new.offices.append(new)
+    new_dict = new.__dict__
+    return make_response(jsonify({
+            'Office': new_dict,
+            'status':'200 OK'
+
+    }))
