@@ -1,7 +1,9 @@
 # politico-api
-API for the Politico application
+API for the Politico application.
 
-Hosted on [Heroku](https://git.heroku.com/my-politico-api.git).
+Hosted on [Heroku](https://my-politico-api.herokuapp.com/).
+
+[![Build Status](https://travis-ci.com/lizwkariuki58/politico-api.svg?branch=develop)](https://travis-ci.com/lizwkariuki58/politico-api)
 
 **API ENDPOINTS**
 
@@ -10,6 +12,12 @@ Hosted on [Heroku](https://git.heroku.com/my-politico-api.git).
 | `POST`   | `/parties/`                    | Create a new party                    |
 | `GET`    | `/parties/`                    | View all parties                      |
 | `GET`    | `/parties/<int:party_id>`      | Get a specific party                  |
+| `UPDATE` | `/parties/<int:party_id>`      | Update party details                  |
+| `DELETE` | `/parties/<int:party_id>`      | Delete a political party              |
+| `POST`   | `/offices/`                    | Create a new office                   |
+| `GET`    | `/offices/`                    | View all offices                      |
+| `GET`    | `/offices/<int:office_id>`     | Get a specific office                 |
+
 
 
 **Payloads**
@@ -17,6 +25,7 @@ Hosted on [Heroku](https://git.heroku.com/my-politico-api.git).
 *Create a Party*
 
 The request to create a party:
+
 ```/parties/```
 
 Payload
@@ -25,12 +34,12 @@ Payload
     'id':1,
     'name': 'Gryffindor'
     'hqAddress': '12 Grimmauld Place'
-    'slogan': 'Where dwell the      brave at heart'
+    'slogan': 'Where dwell the brave at heart'
 }
 ```
 
 This response shall be returned
 ```
-'message': 'Party Created'
-'party_id': 1
+'Party': Party
+'status': '200 OK'
 ```
