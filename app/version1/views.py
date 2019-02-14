@@ -98,14 +98,21 @@ def create_office():
     office_type = data['office_type']
     name= data['name']
 
-     # Instance of PoliticalParty is created and the data above is unpacked as an argument
     new=GovernmentOffice(**data)
 
-    #The new party is added to the parties list. It is then made json serializable
     new.offices.append(new)
     new_dict = new.__dict__
     return make_response(jsonify({
             'Office': new_dict,
             'status':'200 OK'
 
+    }))
+
+@offices_bp.route('/offices', methods = ['GET'])
+def get_all_offices():
+    #This method should be available to all users
+    new= GovernmentOffice()
+    return make_response(jsonify({
+        'Offices': new.offices,
+        'Status': '200 OK'
     }))
