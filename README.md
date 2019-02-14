@@ -3,6 +3,8 @@ API for the Politico application.
 
 Hosted on [Heroku](https://my-politico-api.herokuapp.com/).
 
+[![Build Status](https://travis-ci.com/lizwkariuki58/politico-api.svg?branch=develop)](https://travis-ci.com/lizwkariuki58/politico-api)
+
 **API ENDPOINTS**
 
 | Method   | Endpoint                       | Description                           |
