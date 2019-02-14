@@ -4,7 +4,11 @@ python:
   -2.7
   -3.5
   -3.6
-install: pip3 install -r requirement.txt
+env:
+  - FLASK=1.0.2
+  - FLASK=0.10.1
+  
+install: pip install -r requirement.txt
 before script:
   - export FLASK_APP =  "$TRAVIS_BUILD_DIR/app.py"
   - export FLASK_DEBUG=1
