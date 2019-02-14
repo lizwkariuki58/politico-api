@@ -5,7 +5,7 @@ from app.version1.models import PoliticalParty, GovernmentOffice
 parties_bp= Blueprint('parties',__name__)
 offices_bp= Blueprint('offices',__name__)
 
-@parties_bp.route('/parties/', methods = ['POST'])
+@parties_bp.route('/parties', methods = ['POST'])
 def create_party():
     #This method should only be available to an admin user. 
     #Responses from the request.get_json request saved in a Python dictionary called data.
