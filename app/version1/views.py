@@ -111,10 +111,11 @@ def create_office():
 
 @offices_bp.route('/api/v1/offices', methods = ['GET'])
 def get_all_offices():
-    #This method should be available to all users
+    #This object is created to be able to access the offices list in the GovernmentOffice class
     new= GovernmentOffice()
+    new_dict = new.__dict__
     return make_response(jsonify({
-        'Offices': new.offices,
+        'Offices': new_dict,
         'Status': '200 OK'
     }))
 
