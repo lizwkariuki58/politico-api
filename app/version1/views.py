@@ -118,7 +118,7 @@ def get_all_offices():
         'Status': '200 OK'
     }))
 
-@offices_bp.route('api/v1/offices/<int:office_id>', methods = ['GET'])
+@offices_bp.route('/api/v1/offices/<int:office_id>', methods = ['GET'])
 def get_specific_office(office_id):
     #This object is created to access the office[] list in the Government Offices class
     new = GovernmentOffice()
