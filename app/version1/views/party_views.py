@@ -1,14 +1,12 @@
 from flask import Blueprint,jsonify,request,make_response, abort
 import json
-from app.version1.models import PoliticalParty, GovernmentOffice
+from app.version1.models import PoliticalParty
 
 parties_bp= Blueprint('parties',__name__)
-offices_bp= Blueprint('offices',__name__)
 
-@parties_bp.route('/api/v1/parties/', methods = ['POST'])
+@parties_bp.route('/parties', methods = ['POST'])
 def create_party():
-    #This method should only be available to an admin user. 
-    #Responses from the request.get_json request saved in a Python dictionary called data.
+    
     data = request.get_json()
 
     name = data['name']
@@ -27,17 +25,17 @@ def create_party():
 
     }))
 
-@parties_bp.route('/api/v1/parties/', methods = ['GET'])
+@parties_bp.route('/parties/', methods = ['GET'])
 def get_all_parties():
     #This method should be available to all users
     new= PoliticalParty()
-    new_dict= new.parties
+    new_dict=new.__dict__
     return make_response(jsonify({
         'parties': new_dict,
         'status': '200 OK'
     }),200)
 
-@parties_bp.route('/api/v1/parties/<int:party_id>', methods = ['GET'])
+@parties_bp.route('/parties/<int:party_id>', methods = ['GET'])
 def get_specific_party(party_id):
     new = PoliticalParty()
     for party in new.parties:
@@ -90,47 +88,4 @@ def delete_party(party_id):
     return make_response(jsonify({
         'Message':'Party Not Found',
         'Status': '404 Not Found'
-        }))    
-
-@offices_bp.route('/api/v1/offices',methods=['POST'])
-def create_office():
-    data = request.get_json()
-
-    office_type = data['office_type']
-    name= data['name']
-
-    new=GovernmentOffice(**data)
-
-    new.offices.append(new)
-    new_dict = new.__dict__
-    return make_response(jsonify({
-            'Office': new_dict,
-            'status':'200 OK'
-
-    }))
-
-@offices_bp.route('/api/v1/offices', methods = ['GET'])
-def get_all_offices():
-    #This object is created to be able to access the offices list in the GovernmentOffice class
-    new= GovernmentOffice()
-    new_dict = new.__dict__
-    return make_response(jsonify({
-        'Offices': new_dict,
-        'Status': '200 OK'
-    }))
-
-@offices_bp.route('/api/v1/offices/<int:office_id>', methods = ['GET'])
-def get_specific_office(office_id):
-    #This object is created to access the office[] list in the Government Offices class
-    new = GovernmentOffice()
-    for govt_office in new.offices:
-        if govt_office.id==office_id:
-            govt_office_dict=govt_office.__dict__
-            return make_response(jsonify({
-                    'Status': 200,
-                    'Office': govt_office_dict
-            }))
-    return make_response(jsonify({
-        'Status': '404',
-        'Error': 'Office Not Found'
         }))    
