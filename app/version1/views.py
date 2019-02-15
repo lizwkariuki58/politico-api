@@ -5,7 +5,7 @@ from app.version1.models import PoliticalParty, GovernmentOffice
 parties_bp= Blueprint('parties',__name__)
 offices_bp= Blueprint('offices',__name__)
 
-@parties_bp.route('/parties', methods = ['POST'])
+@parties_bp.route('/api/v1/parties/', methods = ['POST'])
 def create_party():
     #This method should only be available to an admin user. 
     #Responses from the request.get_json request saved in a Python dictionary called data.
@@ -27,16 +27,17 @@ def create_party():
 
     }))
 
-@parties_bp.route('/parties', methods = ['GET'])
+@parties_bp.route('/api/v1/parties/', methods = ['GET'])
 def get_all_parties():
     #This method should be available to all users
     new= PoliticalParty()
+    new_dict= new.parties
     return make_response(jsonify({
-        'parties': new.parties,
+        'parties': new_dict,
         'status': '200 OK'
     }),200)
 
-@parties_bp.route('/parties/<int:party_id>', methods = ['GET'])
+@parties_bp.route('/api/v1/parties/<int:party_id>', methods = ['GET'])
 def get_specific_party(party_id):
     new = PoliticalParty()
     for party in new.parties:
@@ -51,7 +52,7 @@ def get_specific_party(party_id):
         'Status': '404 Not Found'
         }))    
 
-@parties_bp.route('/parties/<int:party_id>', methods =['PUT'])
+@parties_bp.route('/api/v1/parties/<int:party_id>', methods =['PUT'])
 def update_party(party_id):
     new= PoliticalParty()
     data= request.json
@@ -75,7 +76,7 @@ def update_party(party_id):
         'Status':'404 Party Not Found'
         }))
 
-@parties_bp.route('/parties/<int:party_id>',methods=['DELETE'])
+@parties_bp.route('/api/v1/parties/<int:party_id>',methods=['DELETE'])
 def delete_party(party_id):
     new = PoliticalParty()
     for party in new.parties:
@@ -91,7 +92,7 @@ def delete_party(party_id):
         'Status': '404 Not Found'
         }))    
 
-@offices_bp.route('/offices',methods=['POST'])
+@offices_bp.route('/api/v1/offices',methods=['POST'])
 def create_office():
     data = request.get_json()
 
