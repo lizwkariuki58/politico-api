@@ -98,10 +98,8 @@ def create_office():
     office_type = data['office_type']
     name= data['name']
 
-     # Instance of PoliticalParty is created and the data above is unpacked as an argument
     new=GovernmentOffice(**data)
 
-    #The new party is added to the parties list. It is then made json serializable
     new.offices.append(new)
     new_dict = new.__dict__
     return make_response(jsonify({
@@ -109,3 +107,28 @@ def create_office():
             'status':'200 OK'
 
     }))
+
+@offices_bp.route('/offices', methods = ['GET'])
+def get_all_offices():
+    #This method should be available to all users
+    new= GovernmentOffice()
+    return make_response(jsonify({
+        'Offices': new.offices,
+        'Status': '200 OK'
+    }))
+
+@offices_bp.route('/offices/<int:office_id>', methods = ['GET'])
+def get_specific_office(office_id):
+    #This object is created to access the office[] list in the Government Offices class
+    new = GovernmentOffice()
+    for govt_office in new.offices:
+        if govt_office.id==office_id:
+            govt_office_dict=govt_office.__dict__
+            return make_response(jsonify({
+                    'Status': 200,
+                    'Office': govt_office_dict
+            }))
+    return make_response(jsonify({
+        'Status': '404',
+        'Error': 'Office Not Found'
+        }))    
