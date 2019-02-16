@@ -1,6 +1,6 @@
 from flask import Blueprint,jsonify,request,make_response, abort
 import json
-from app.version1.models import PoliticalParty
+from app.version1.models import PoliticalParty, parties
 
 parties_bp= Blueprint('parties',__name__)
 
@@ -17,7 +17,7 @@ def create_party():
     new=PoliticalParty(**data)
 
     #The new party is added to the parties list. It is then made json serializable
-    new.parties.append(new)
+    parties.append(new)
     new_dict = new.__dict__
     return make_response(jsonify({
             'Party': new_dict,
@@ -28,19 +28,16 @@ def create_party():
 @parties_bp.route('/parties/', methods = ['GET'])
 def get_all_parties():
     #This method should be available to all users
-    new= PoliticalParty()
-    new_dict=new.__dict__
     return make_response(jsonify({
-        'parties': new_dict,
+        'parties': parties,
         'status': '200 OK'
     }),200)
 
 @parties_bp.route('/parties/<int:party_id>', methods = ['GET'])
 def get_specific_party(party_id):
-    new = PoliticalParty()
-    for party in new.parties:
-        if new.id==party_id:
-            new_dict=new.__dict__
+    for my_party in parties:
+        if my_party.id==party_id:
+            new_dict=my_party.__dict__
             return make_response(jsonify({
                     'Party':new_dict,
                     'Status':'200 OK'
