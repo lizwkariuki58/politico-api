@@ -7,21 +7,33 @@ parties_bp= Blueprint('parties',__name__)
 @parties_bp.route('/parties', methods = ['POST'])
 def create_party():
     
+    if not request.json or not 'name' in request.json or not 'hqAddress' in request.json:
+        return make_response(jsonify({
+                'status': 400,
+                'error': 'Bad Request, Update your JSON data.'
+        }))
+    
     data = request.get_json()
+
+    for party in parties:
+        if party['name'] == data['name']:
+            return make_response(jsonify({
+                    'status': 409,
+                    'error': 'Party already exists'
+            }))
 
     name = data['name']
     hqAddress= data['hqAddress']
     slogan= data['slogan']
 
-     # Instance of PoliticalParty is created and the data above is unpacked as an argument
     new=PoliticalParty(**data)
 
     #The new party is added to the parties list. It is then made json serializable
     parties.append(new)
     new_dict = new.__dict__
     return make_response(jsonify({
-            'Party': new_dict,
-            'status':'200 OK'
+            'status': 201,
+            'Party': new_dict
 
     }))
 
@@ -29,9 +41,9 @@ def create_party():
 def get_all_parties():
     #This method should be available to all users
     return make_response(jsonify({
-        'parties': parties,
-        'status': '200 OK'
-    }),200)
+        'status':200,
+        'Parties': parties
+    }))
 
 @parties_bp.route('/parties/<int:party_id>', methods = ['GET'])
 def get_specific_party(party_id):
@@ -39,50 +51,47 @@ def get_specific_party(party_id):
         if my_party.id==party_id:
             new_dict=my_party.__dict__
             return make_response(jsonify({
-                    'Party':new_dict,
-                    'Status':'200 OK'
+                    'Status':200,
+                    'Party': new_dict
             }))
     return make_response(jsonify({
-        'Message':'Party Not Found',
-        'Status': '404 Not Found'
+        'Status':404,
+        'Error': 'Party not found.'
         }))    
 
-@parties_bp.route('/api/v1/parties/<int:party_id>', methods =['PUT'])
+@parties_bp.route('/parties/<int:party_id>', methods =['PUT'])
 def update_party(party_id):
-    new= PoliticalParty()
-    data= request.json
-    for party in new.parties:
-        if new.id==party_id:
-            if request.json:
-                new.name=data.get('name', new.name)
-                new.hqAddress=data['hqAddress']
-                new.slogan=data['slogan']
-            return make_response(jsonify({
-                    'Message':'Party not Updated',
-                    'Status':'400 Bad Request'
-                    }))
-    new_dict=new.__dict__
-    return make_response(jsonify({
-        'Message':new_dict,
-        'status':'200 OK'
-    }))
-    return make_response(jsonify({
-        'Message':'Party Not Found',
-        'Status':'404 Party Not Found'
+    if not request.json or not 'id' in request.json:
+        return make_response(jsonify({
+                'status': 400,
+                'Error':'Bad Request, Please update your JSON'
         }))
+    for my_party in parties:
+        if my_party['id']==party_id:
+            data = request.json()
+
+            my_party['name']= data['name']
+            my_party['hqAddress']= data['hqAddress']
+            my_party['slogan']= data['slogan']
+            return make_response(jsonify({
+                'Status':200,
+                'Party': my_party
+            }))
+    return make_response(jsonify({
+            'Status':404,
+            'Error': 'Party not found'
+    }))
 
 @parties_bp.route('/api/v1/parties/<int:party_id>',methods=['DELETE'])
 def delete_party(party_id):
-    new = PoliticalParty()
-    for party in new.parties:
-        if new.id==party_id:
-            new.parties.remove(new)
-            new_dict=new.__dict__
+    for my_party in parties:
+        if my_party['id']==party_id:
+            parties.remove(my_party)
             return make_response(jsonify({
-                    'Party':'Party Deleted',
-                    'Status':'200 OK'
+                    'Status':200,
+                    'Message': 'Party deleted'
             }))
     return make_response(jsonify({
-        'Message':'Party Not Found',
-        'Status': '404 Not Found'
+        'Status': 404,
+        'Error':'Party not found'
         }))    
