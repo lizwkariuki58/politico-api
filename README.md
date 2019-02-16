@@ -7,16 +7,16 @@ Hosted on [Heroku](https://my-politico-api.herokuapp.com/).
 
 **API ENDPOINTS**
 
-| Method   | Endpoint                       | Description                           |
-| -------- | -------------------------------| ------------------------------------- |
-| `POST`   | `/parties/`                    | Create a new party                    |
-| `GET`    | `/parties/`                    | View all parties                      |
-| `GET`    | `/parties/<int:party_id>`      | Get a specific party                  |
-| `UPDATE` | `/parties/<int:party_id>`      | Update party details                  |
-| `DELETE` | `/parties/<int:party_id>`      | Delete a political party              |
-| `POST`   | `/offices/`                    | Create a new office                   |
-| `GET`    | `/offices/`                    | View all offices                      |
-| `GET`    | `/offices/<int:office_id>`     | Get a specific office                 |
+| Method   | Endpoint                              | Description                           |
+| -------- | --------------------------------------| ------------------------------------- |
+| `POST`   | `/api/v1/parties/`                    | Create a new party                    |
+| `GET`    | `/api/v1/parties/`                    | View all parties                      |
+| `GET`    | `/api/v1/parties/<int:party_id>`      | Get a specific party                  |
+| `UPDATE` | `/api/v1/parties/<int:party_id>`      | Update party details                  |
+| `DELETE` | `/api/v1/parties/<int:party_id>`      | Delete a political party              |
+| `POST`   | `/api/v1/offices/`                    | Create a new office                   |
+| `GET`    | `/api/v1/offices/`                    | View all offices                      |
+| `GET`    | `/api/v1/offices/<int:office_id>`     | Get a specific office                 |
 
 
 
@@ -26,12 +26,11 @@ Hosted on [Heroku](https://my-politico-api.herokuapp.com/).
 
 The request to create a party:
 
-```/parties/```
+```api/v1/parties/```
 
 Payload
 ```
 {
-    'id':1,
     'name': 'Gryffindor'
     'hqAddress': '12 Grimmauld Place'
     'slogan': 'Where dwell the brave at heart'
@@ -41,5 +40,46 @@ Payload
 This response shall be returned
 ```
 'Party': Party
+'status': '200 OK'
+```
+
+*Update a Party*
+
+The request to update a party:
+
+```/api/v1/parties/<int:party_id>```
+
+Payload
+```
+{
+    'name': 'Gryffindor'
+    'hqAddress': '12 Grimmauld Place'
+    'slogan': 'Where dwell the brave at heart'
+}
+```
+
+This response shall be returned
+```
+'Party': Party Updated
+'status': '200 OK'
+```
+
+*Create an Office*
+
+The request to create an office:
+
+```/api/v1/offices/```
+
+Payload
+```
+{
+    'office_type': 'Executive'
+    'name': 'President'
+}
+```
+
+This response shall be returned
+```
+'Office': Office
 'status': '200 OK'
 ```
