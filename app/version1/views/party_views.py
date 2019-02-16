@@ -48,7 +48,7 @@ def get_all_parties():
 @parties_bp.route('/parties/<int:party_id>', methods = ['GET'])
 def get_specific_party(party_id):
     for my_party in parties:
-        if my_party.id==party_id:
+        if my_party['id']==party_id:
             new_dict=my_party.__dict__
             return make_response(jsonify({
                     'Status':200,
