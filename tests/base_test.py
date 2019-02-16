@@ -1,13 +1,15 @@
 from unittest import TestCase
 
-from run import app 
-from app.version1.models import offices
-from app.version1.models import parties
+from app import create_app 
+from instance.config import app_config
+from app.version1.models.models import offices
+from app.version1.models.models import parties
 
-class BaseTestCase(TestCase):
+class BaseTest(TestCase):
     def setUp(self):
-        client = app.test_client()
-        self.client = client
+        self.app=create_app('testing')
+        self.client = self.app.test_client
+
 
     def tearDown(self):
         parties.clear()
