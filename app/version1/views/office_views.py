@@ -1,6 +1,6 @@
 from flask import Blueprint,jsonify,request,make_response
 import json
-from app.version1.models import GovernmentOffice,offices
+from app.version1.models.models import GovernmentOffice,offices
 
 offices_bp= Blueprint('offices',__name__)
 
@@ -33,7 +33,7 @@ def create_office():
             'status': 201,
             'Office': new_dict
 
-    }))
+    }),201)
 
 @offices_bp.route('/offices', methods = ['GET'])
 def get_all_offices():
