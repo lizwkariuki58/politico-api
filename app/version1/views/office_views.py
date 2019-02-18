@@ -30,10 +30,10 @@ def create_office():
     offices.append(new)
     new_dict = new.__dict__
     return make_response(jsonify({
-            'status': 200,
+            'status': 201,
             'Office': new_dict
 
-    }),200)
+    }),201)
 
 @offices_bp.route('/offices', methods = ['GET'])
 def get_all_offices():
