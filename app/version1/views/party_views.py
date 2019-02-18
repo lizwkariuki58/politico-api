@@ -1,6 +1,6 @@
 from flask import Blueprint,jsonify,request,make_response, abort
 import json
-from app.version1.models import PoliticalParty, parties
+from app.version1.models.models import PoliticalParty, parties
 
 parties_bp= Blueprint('parties',__name__)
 
