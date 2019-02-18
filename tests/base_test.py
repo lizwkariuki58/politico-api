@@ -8,7 +8,7 @@ from app.version1.models.models import parties
 class BaseTest(TestCase):
     def setUp(self):
         self.app=create_app('testing')
-        self.client = self.app.test_client
+        self.client = self.app.test_client()
 
 
     def tearDown(self):
