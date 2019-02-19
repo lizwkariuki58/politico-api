@@ -5,7 +5,7 @@ Hosted on [Heroku](https://my-politico-api.herokuapp.com/).
 
 [![Build Status](https://travis-ci.com/lizwkariuki58/politico-api.svg?branch=develop)](https://travis-ci.com/lizwkariuki58/politico-api)
 
-[![Coverage Status](https://coveralls.io/repos/github/lizwkariuki58/politico-api/badge.svg?branch=develop)](https://coveralls.io/github/lizwkariuki58/politico-api?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/lizwkariuki58/politico-api/badge.svg?)](https://coveralls.io/github/lizwkariuki58/politico-api?branch=develop)
 
 **API ENDPOINTS**
 
