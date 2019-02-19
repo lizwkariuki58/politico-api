@@ -12,7 +12,7 @@ env:
   - export FLASK_ENV= development
 
 script: 
-  - pytest --cov tests/
+  - pytest --cov=tests/
 
 after_success:
   - coveralls
