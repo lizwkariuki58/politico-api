@@ -11,8 +11,8 @@ env:
   - export FLASK_DEBUG=1
   - export FLASK_ENV= development
 
-script: 
-  - pytest --cov=tests/
+script:
+  - py.test --cov=tests -v
 
 after_success:
   - coveralls
