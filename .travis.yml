@@ -14,6 +14,7 @@ env:
 
 script:
   - pytest -v tests/
+  - - coverage run --source=app -m pytest && coverage report
 
 after_success:
   - coveralls
