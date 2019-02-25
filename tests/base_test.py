@@ -12,6 +12,5 @@ class BaseTest(TestCase):
 
 
     def tearDown(self):
-        #parties.clear()
-        #offices.clear()
-        pass
+        parties.clear()
+        offices.clear()
