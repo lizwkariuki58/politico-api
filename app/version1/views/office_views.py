@@ -6,23 +6,25 @@ offices_bp= Blueprint('offices',__name__)
 
 @offices_bp.route('/offices',methods=['POST'])
 def create_office():
-    if not request.json or not 'name' in request.json or not 'office_type' in request.json:
+    data = request.get_json()
+    if not request.json:
         return make_response(jsonify({
                 'status': 400,
-                'error': 'Bad Request, Update your JSON data.'
-        }))
+                'error': 'Bad Request, Input all your data in JSON format.'
+        }),400)
     
-    data = request.get_json()
-
+    if len(data['name']) == 0 or len(data['office_type'])==0:
+        return make_response(jsonify({
+                'Status': 400,
+                'Error':'Bad Request, Update all fields of your JSON data'
+        }),400)
+    
     for office in offices:
-        if office['name'] == data['name']:
+        if office.name == data['name']:
             return make_response(jsonify({
                     'status': 409,
                     'error': 'Office already exists'
-            }))
-
-    name = data['name']
-    office_type= data['office_type']
+            }),409)
 
     new=GovernmentOffice(**data)
 
