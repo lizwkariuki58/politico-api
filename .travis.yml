@@ -5,6 +5,7 @@ python:
   
 install: 
   - pip install -r requirements.txt
+  - pip install coveralls
 
 env:
   - export FLASK_APP= 'run.py'
@@ -12,7 +13,8 @@ env:
   - export FLASK_ENV= development
 
 script:
-  - py.test --cov=tests -v
+  - pytest -v tests/
+  - coverage run --source=app -m pytest && coverage report
 
 after_success:
   - coveralls
