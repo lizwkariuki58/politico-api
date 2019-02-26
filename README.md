@@ -7,6 +7,8 @@ Hosted on [Heroku](https://my-politico-api.herokuapp.com/).
 
 [![Coverage Status](https://coveralls.io/repos/github/lizwkariuki58/politico-api/badge.svg?branch=develop)](https://coveralls.io/github/lizwkariuki58/politico-api?branch=develop)
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/12f0f1314a467dd219a1/maintainability)](https://codeclimate.com/github/lizwkariuki58/politico-api/maintainability)
+
 **API ENDPOINTS**
 
 | Method   | Endpoint                              | Description                           |
