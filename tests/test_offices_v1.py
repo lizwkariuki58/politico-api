@@ -1,19 +1,22 @@
+import json
 import unittest
 from tests.base_test import BaseTest
 from tests.helpers import office1,office2,office3, office4
+import tests.helper_methods as hm
 
 class TestOffices(BaseTest):
     def test_create_offices(self):
-        response = self.client.post("/api/v1/offices", data=office1)
-        self.assertEqual(response.status_code,200)
+        response = hm.create_office(self, office1)
+        self.assertEqual(response.status_code,201)
 
+    #Fix this test, it tests for invalid data not lack of json data
     def test_create_offices_does_not_work_without_json_data(self):
-        response = self.client.post("api/v1/offices", data=office4)
+        response = self.client.post ("/api/v1/offices", data= office4)
         self.assertEqual(response.status_code,400)
-        self.assertIn(b'Bad Request, Input all your data in JSON format.',response.data)
+       
 
     def test_create_offices_does_not_work_with_invalid_data(self):
-        response = self.client.post("api/v1/offices", data=office3)
+        response = hm.create_office(self,office3)
         self.assertEqual(response.status_code,400)
         self.assertIn(b'Bad Request, Update all fields of your JSON data',response.data)
 

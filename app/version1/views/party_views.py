@@ -16,7 +16,7 @@ def create_party():
     data = request.get_json()
 
     for party in parties:
-        if party['name'] == data['name']:
+        if party.name == data['name']:
             return make_response(jsonify({
                     'status': 409,
                     'error': 'Party already exists'
@@ -35,11 +35,10 @@ def create_party():
             'status': 201,
             'Party': new_dict
 
-    }))
+    }),201)
 
-@parties_bp.route('/parties/', methods = ['GET'])
+@parties_bp.route('/parties', methods = ['GET'])
 def get_all_parties():
-    #This method should be available to all users
     return make_response(jsonify({
         'status':200,
         'Parties': parties
