@@ -1,7 +1,7 @@
 import unittest
-from tests.base_test import BaseTest
-from tests.helpers import party1,party2
-import tests.helper_methods as hm
+from tests.version1.base_test import BaseTest
+from tests.version1.helpers import party1,party2
+import tests.version1.helper_methods as hm
 
 class TestParties(BaseTest):
     def test_create_party(self):
